@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANKETA</title>
+</head>
+<body>
+    <h1>ANKETA</h1>
+    <script>
+        let lastName;
+        do
+        {
+            lastName=prompt('Ваша фамилия?', 'фамилия');  
+        }
+        while (lastName === '');
+        let firstName;
+        do
+        {
+            firstName=prompt('Ваше имя?', 'имя');  
+        }
+        while (firstName === ''); 
+        let secondName;
+        do        
+        {
+            secondName=prompt('Ваше отчество?', 'отчетство');  
+        } 
+        while (secondName === '');
+        let age;
+        do
+        {
+            age=prompt('Ваш возраст в годах?', 'возраст');  
+        } 
+        while ((age <= 0)||(age>120)||isNaN(age));
+        const gender=confirm("Ваш пол мужской?");
+        let genderAlert;
+        if (gender) {
+            genderAlert="мужской";        
+        } else {
+            genderAlert="женский";
+        }
+        let ageAlert;
+        if ((gender===true)&&(age>=63)) {
+            ageAlert="да";
+        } else {
+                if ((gender===false)&&(age>=58))
+                ageAlert="да";
+                else ageAlert="нет";
+        }                 
+        alert(`ваше ФИО: ${lastName} ${firstName} ${secondName}
+ваш возраст в годах: ${age}
+ваш возраст в днях: ${(age*365)}
+через 5 лет вам будет: ${(parseInt(age) + 5)}
+ваш пол: ${genderAlert}
+вы на пенсии: ${ageAlert}`);
+        
+    </script>
+</body>
+</html>
