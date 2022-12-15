@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const userStr = prompt('Введите строку');
+    function clearStr (str) {
+        
+        let newStr = userStr.toLowerCase();
+        console.log(newStr);
+        const characterStr = " .,ъь";
+        for (let i=0;  i < characterStr.length; i++){
+            for (let j = 0; j < newStr.length; j++){
+                if(newStr[j] === characterStr[i]) {
+                    newStr = newStr.replace(newStr[j], '');
+                    
+                }
+            }
+
+        }
+        return newStr
+        
+    }
+    let res = clearStr(userStr); 
+    console.log(res);   
+        </script>
+</body>
+</html>

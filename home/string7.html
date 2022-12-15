@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+    const strTest1 = 'din';
+    const strTest2 = 'recede';
+    const strTest3 = 'Succes';
+    const strTest4 = '(( @'; 
+    function convert(str) {
+    const arr = str.toLowerCase().split('');
+    let arrRepeat = '('.repeat(str.length).split('');
+   
+    for (let i=0; i<arr.length-1; i++){
+        for (let j=i+1; j<arr.length; j++){
+            if (arr[j] === arr[i]){
+                arrRepeat[j]=')';
+                arrRepeat[i]=')';            
+            }            
+        }
+    }
+    let result = arrRepeat.join('');
+    return result;
+    }  
+    const newTest1 = convert(strTest1);
+    console.log(newTest1); 
+    const newTest2 = convert(strTest2);
+    console.log(newTest2);
+    const newTest3 = convert(strTest3);
+    console.log(newTest3); 
+    const newTest4 = convert(strTest4);
+    console.log(newTest4);       
+
+        </script>        
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const userStr = prompt('Введите строку');
+    if (userStr === '')
+    alert('Вы ввели пустую строку');
+    function isPalindrome (str) {
+        let newStr = str.toLowerCase().replace(/ё/g, 'e');
+        const characterStr = ' .,-ьъ';
+        while (characterStr.includes(newStr[0])) { 
+            newStr = newStr.slice(1);            
+        }
+        while (characterStr.includes(newStr[newStr.length-1])) {
+            newStr = newStr.slice(0, newStr.length-1);
+        }                
+        for (let i=0;  i < characterStr.length; i++){
+            for (let j = 0; j < newStr.length; j++){
+                if(newStr[j] === characterStr[i]) {
+                    newStr = newStr.replace(newStr[j], '');
+                    j--;
+                }
+            }
+        }  
+                       
+        console.log(`Чистая строка: ${newStr}`);
+          
+            let num = Math.trunc(newStr.length/2 + 2);
+          for (let i=0; i<num; i++) {
+            if (newStr[i] !== newStr[newStr.length-i-1])
+            return false;
+        }
+            return true;
+          
+            
+            
+        
+    }
+    let res=isPalindrome(userStr);          
+    if (res) {
+        console.log(`Строка '${userStr}' является палиндромом.`);
+    } else {
+        console.log(`Строка '${userStr}' не является палиндромом.`);
+    } 
+        </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    const userStr = prompt('Введите строку');
+    
+        function isPalindrome (newStr1) {
+            if (newStr1.length === 1)
+            return true
+            if (newStr1.length === 2)
+            return true
+            else if (newStr1[0] === newStr1[newStr1.length-1]) {
+                newStr1 = newStr1.slice(0, i);
+                return isPalindrome(newStr1);
+            }
+            return false;
+        }  
+                     
+            
+        
+    
+     
+    let res=isPalindrome(userStr);        
+    if (res) {
+        console.log(`Строка '${userStr}' является палиндромом.`);
+    } else {
+        console.log(`Строка '${userStr}' не является палиндромом.`);
+    } 
+        </script>
+</body>
+</html>

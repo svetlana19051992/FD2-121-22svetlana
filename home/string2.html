@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+    const strTest = 'abcd';       
+    function accum(str) {
+        let result='';
+        for (let i=0; i<str.length; i++) {            
+            result+=str[i].toUpperCase() + str[i].repeat(i) + "-";            
+        }
+        resultNew=result.slice(0, result.length-1);
+        console.log(resultNew);
+        return resultNew;
+    }
+    const res = accum(strTest);
+    console.log(res);
+        </script>        
+</body>
+</html>

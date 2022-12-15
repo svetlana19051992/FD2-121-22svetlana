@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+    const stringTest1="Dermatoglyphics";
+    const stringTest2="moose";
+    const stringTest3="aba";
+    
+    function isIsogram (str) {
+        
+        const arr = str.toLowerCase().split('');  
+        
+            outer:
+            for(let i=0; i<arr.length-1; i++) {   
+            inter:           
+            for (let j=i+1; j<arr.length; j++){                
+            if (arr[j] === arr[i]) {
+            console.log(`"${str}" --> ложь`); 
+
+            break outer;                    
+            } else { 
+                if ((j === arr.length-1) && (i === arr.length-2))
+                    console.log(`"${str}" --> истина`);
+            }
+            }    
+        }
+         
+    }
+        isIsogram(stringTest1);
+        isIsogram(stringTest2);
+        isIsogram(stringTest3);
+    
+        
+        </script>        
+</body>
+</html>

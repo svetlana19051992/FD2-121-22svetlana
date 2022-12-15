@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>  
+        strTest='1 2 -3 4 5';
+        function extremeValues (str) {
+            let arr = str.split(' ');
+            let max=arr[0];
+            let min=arr[0];
+            for (let i=0; i<arr.length; i++) {
+                if (arr[i]<arr[i+1])
+                max = arr[i+1];
+                if (arr[i]>arr[i+1])
+                min = arr[i+1];
+            }
+            let result=[max, min].join(' ');
+            return result;
+        }
+        res = extremeValues(strTest);
+        console.log(res);
+        </script>        
+</body>
+</html>
