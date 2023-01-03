@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+
+
+    <title>Document</title>
+    <style>
+        body {
+            height: 10000px;
+        }
+
+        [title='hello1'] {
+            color: blue;
+            font-size: 30px;
+        }
+
+        .wrap {
+            margin: 50px;
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            position: relative;
+        }
+
+        .item {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: sticky;
+            top: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app"></div>
+    <button onclick="render()">render</button>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+        crossorigin="anonymous"></script>
+    <script>
+
+        const cars = [
+            {
+                id: 1,
+                name: "BMW",
+                model: "1",
+                img: "bmw.jpeg",
+                discription: "ienvijernjernjev ehrvejrnveo",
+                prise: "1",
+            },
+            {
+                id: 2,
+                name: "KIA",
+                model: "2",
+                img: "kia.jpeg",
+                discription: "hvbeuruhfgv   einvijernvoiernove",
+                prise: "2",
+            },
+            {
+                id: 3,
+                name: "Audi",
+                model: "3",
+                img: "udi.jpeg",
+                discription: "dbvhebve rvehr vjer vher  veer",
+                prise: "4",
+            },
+        ];
+
+
+        function render() {
+            const app = document.getElementById('app');
+
+            const res = cars.reduce((prev, car) => {
+                const { img, name, discription, prise} = car;
+
+                return prev += `<div class="card" style="width: 18rem;">
+                            <img src="${img}" class="card-img-top">
+                            <div class="card-body">
+                                <h5 class="card-title">${name}</h5>
+                                <p class="card-text">${discription}</p>
+                                <p class="card-text">${prise}</p>
+                                <a href="#" class="btn btn-primary">Go somewhere</a>
+                            </div>
+                        </div>`
+            }, '');
+
+            app.innerHTML = res;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+  </head>
+  <body>
+    <button id='add-coctail'>Добавить</button>  
+    <button id='get-coctail'>Рецепт</button>
+    <button id='delete-coctail'>Удалить</button>
+    <button id='all-coctails'>Список рецептов</button>
+    <script>
+function HashStorageFunc() {
+      var self=this;
+      store_ = {};     
+      self.add = function(key, value) {
+      store_[key] = value; 
+    }
+  
+    self.getValue = function(key) {
+      return store_[key]; 
+    }
+  
+    self.deleteValue = function(key) {
+      if(!(key in store_)) {
+        return false
+      }  
+      return delete store_[key];
+    }
+  
+    self.getKeys = function() {
+      return Object.keys(store_);
+    }
+  }  
+  const coctailsStorage = new HashStorageFunc(); 
+  
+  const addButton = document.getElementById('add-coctail');
+
+  addButton.onclick = function () {      
+    const name = window.prompt('Введите название коктеля');
+    const isAlcohol = window.prompt('Напиток алкогольный?');
+    const recipe = window.prompt('Введите рецепт напитка');
+   
+    coctailsStorage.add(name, {name, isAlcohol, recipe});
+    console.log('Coctail was added', coctailsStorage.getValue(name));
+  }
+  const getButton = document.getElementById('get-coctail');
+
+  getButton.onclick = function () {  
+    const name = window.prompt('Введите название коктеля');        
+    const coctail = coctailsStorage.getValue(name);    
+    if (coctail) {
+    console.log(` напиток ${coctail.name}\n алкогольный: ${coctail.isAlcohol}\n рецепт приготовления: ${coctail.recipe}`);
+    } else {
+    console.log('такой напиток отсутствует в хранилище');
+    }
+  }
+  const delButton = document.getElementById('delete-coctail');
+
+  delButton.onclick = function () {  
+    const name = window.prompt('Введите название удаляемого коктеля');       
+    
+    const coctail = coctailsStorage.deleteValue(name);    
+    if (coctail) {
+    console.log(`напиток ${name} удален из хранилища`);
+    } else {
+    console.log('такой напиток отсутствует в хранилище');
+    }
+  }
+  const keysButton = document.getElementById('all-coctails');
+  keysButton.onclick = function () {
+    const allObjKeys = coctailsStorage.getKeys();  
+    for (key of allObjKeys)
+    console.log(key);      
+  }
+</script>  
+</body>
+</html>

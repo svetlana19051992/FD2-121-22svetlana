@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>     
+        const userStr=prompt('Введите строку');     
+        
+        function vowelsCount1(str) {
+            const strVowels = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ';            
+            let count=0;
+            const mas = str.split(''); 
+            mas.forEach(v => {
+                if (strVowels.includes(v))
+            count++; 
+        });           
+            return count;                         
+         }
+         function vowelsCount2(str) {
+            const strVowels = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ';                     
+            const mas = str.split(''); 
+            let count=mas.filter(v => (strVowels.includes(v))).length;                      
+            return count;                         
+         }
+         function vowelsCount3(str) {
+            const strVowels = 'аеёиоуыэюяАЕЁИОУЫЭЮЯ';            
+            
+            const mas = str.split(''); 
+            let count=mas.reduce((a, b) => strVowels.includes(b)? a+1:a, 0);                
+            return count;
+        }
+                
+            
+        const answer1 = vowelsCount1(userStr);
+        console.log (`Количество русских гласных в строке равно ${answer1}.`);
+        const answer2 = vowelsCount2(userStr);
+        console.log (`Количество русских гласных в строке равно ${answer2}.`);
+        const answer3 = vowelsCount3(userStr);
+        console.log (`Количество русских гласных в строке равно ${answer3}.`);
+        
+        </script>        
+</body>
+</html>

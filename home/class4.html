@@ -19,7 +19,8 @@
   </head>
   <body>
     <button onclick="showCars()">Render</button>
-   
+    <button onclick="sortMinMax()">sortMinMax</button>
+    <button onclick="sortMaxMin()">sortMaxMin</button>
     <div id="app">
     
     </div>
@@ -31,42 +32,42 @@
                 model : 'Lexus LF-LC 2012',
                 img : 'l1.jpg', 
                 discription : 'blue',
-                price : 50000
+                price : 45000
             }, {            
                 id : 2,
                 brendtitle : 'Ford', 
                 model : 'Ford gt',
                 img : 'f2.jpg', 
                 discription : 'black',
-                price : 45000
+                price : 50000
             },  {
                 id : 3,
                 brendtitle : 'Aston Martin', 
                 model : 'Aston Martin DBS v12',
                 img : 'aston3.jpg', 
                 discription : 'red',
-                price : 40000
+                price : 35000
             }, {
                 id : 4,
                 brendtitle : 'Lamborghini', 
                 model : 'Lamborghini Aventador 2020',
                 img : 'lamb4.jpg', 
                 discription : 'violet',
-                price : 35000
+                price : 40000
             }, {            
                 id : 5,
                 brendtitle : 'Aston Martin Vanquish', 
                 model : 'Aston Martin Vanquish',
                 img : 'astonvan.jpg', 
                 discription : 'brown',
-                price : 30000
+                price : 25000
             },  {
                 id : 6,
                 brendtitle : 'Mercedes', 
                 model : 'Mercedes SLS',
                 img : 'mers6.jpg', 
                 discription : 'red',
-                price : 25000
+                price : 30000
 
             }
         ]
@@ -80,7 +81,7 @@
       <p class="card-text">${car.discription}</p>
 
       <a href="#${car.id}" class="btn btn-primary">Go sommehere</a>
-      <button onclick="showPrice('${car.id}')">price</button>
+      <button class="card-price" onclick="showPrice('${car.id}')">price</button>
       
     </div>` 
         }
@@ -91,14 +92,26 @@
     }   
 
     function showPrice(num) {
-      let carPrice = document.getElementsByTagName('button')[num];
+      let carPrice = document.getElementsByClassName('card-price')[num-1];
       carPrice.textContent = cars[num-1].price;
     }
+     function sortMinMax() { 
+      cars.sort((a, b) => a.price < b.price ? -1: 1) 
+      return carMinMax
+      }
+      
+        
+      
+      }         
+        
+    function sortMaxMin() { 
+      let carsMaxMin = cars.sort((a, b) => a.price > b.price ? -1: 1)
+      return carsMaxMin          
+    }       
+     
     </script>
   </body>
 </html>
-<button onclick="sortMinMax()">sortMinMax</button>
-<button onclick="sortMaxMin()">sortMacMin</button>
-let collection = document.querySelectorAll("[price]");
-let dataAttr = [];
-collection.forEach(function(item, i, coll))
+for (let car of cars) {
+  let newImg = document.getElementsByClassName('card-img-top')[src];
+  newImg.innerHTML= 
