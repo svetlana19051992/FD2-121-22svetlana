@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>repl.it</title>
+    <!-- <link href="style.css" rel="stylesheet" type="text/css" /> -->
+</head>
+<body>
+    <form name='INFO' metod="post" action="TestForm.php">
+        <label for="pa">Размещение:</label>
+        <input type='radio' name='payment' value="1">бесплатное
+        <input type='radio' name='payment' value="2">платное
+        <input type='radio' name='payment' value="3">VIP
+        <span id='paymenterr' style="color:red"></span> <br><br>
+        <input id="sb" type='submit' name='sub' value="Опубликовать"><br>
+    </form>
+    <script src="scripts/script.js"></script>
+    <script>
+    "use strict";
+var form = document.forms["INFO"];
+form.onsubmit = info_submit;
+for (var _i = 0, _a = Array.from(form.payment); _i < _a.length; _i++) {
+    var radio = _a[_i];
+    radio.onchange = payment_change;
+}
+function payment_change() {
+    document.getElementById("paymenterr").textContent = "";
+}
+function info_submit() {
+    if (!form.payment.value) {
+        document.getElementById("paymenterr").textContent = "Сделайте выбор типа размещения, пожалуйста!";
+        return false;
+    }
+}
+</script>
+</body>
+</html>
+var Count=0;
+var elemsRadio = INFO.elements.payment;
+INFO.elements.sub.addEventListener('click', validSub, false);
+function validSub(EO) {
+  for(let elemRadio of elemsRadio){if (elemRadio.checked){Count=1}};
+  if (Count == 0)  {
+    EO.preventDefault(); document.getElementById('paymenterr').innerHTML = 'Сделайте выбор типа размещения, пожалуйста!'; 
+ document.getElementById('paymenterr').style.cssText = 'color: red';
+  } 
+  else{document.getElementById('paymenterr').innerHTML=''}
+}

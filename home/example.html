@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Page Title</title>
+    </head>
+    <body>
+        <form id="form">
+        <input type="text" id="name"/>
+        <input type="text" id="image"/>
+        <input type="submit" id="add" />
+        </form>
+        <script>
+            window.onload = function() {
+    let form = document.querySelector("#form");
+    let addElem = (text, src) => {
+        let div = document.createElement("div");
+        let h2 = document.createElement("h2");
+        let img = document.createElement("img");
+        img.src = src;
+        div.append(img);
+        h2.textContent = text;
+        div.append(h2);
+        return div;
+    }
+    form.onsubmit = () => {
+        let name = document.querySelector("#name");
+                let image = document.querySelector("#image");
+                document.body.append(addElem(name.value, image.value));
+                return false;
+    }
+}
+
+        </script>
+    </body>
+</html>
+
+window.onload = function() {
+    let form = document.querySelector("#form");
+    let addElem = (text, src) => {
+        let div = document.createElement("div");
+        let h2 = document.createElement("h2");
+        let img = document.createElement("img");
+        img.src = src;
+        div.append(img);
+        h2.textContent = text;
+        div.append(h2);
+        return div;
+    }
+    form.onsubmit = () => {
+        let name = document.querySelector("#name");
+                let image = document.querySelector("#image");
+                document.body.append(addElem(name.value, image.value));
+                return false;
+    }
+}

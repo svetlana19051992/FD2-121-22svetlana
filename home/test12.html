@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text">
+
+    <script>
+        // window.addEventListener('keydown', function(e){
+        //     console.log('keyCode', e.keyCode)
+
+        //     if(e.keyCode === 112 || e.keyCode === 116){
+        //         e.preventDefault();
+        //     }
+        // })
+
+        const inp = document.querySelector('[type]');
+        inp.addEventListener('blur', () => {
+            console.log("blur");
+        })
+        inp.addEventListener('change', () => {
+            console.log("change");
+        })
+        inp.addEventListener('input', (e) => {
+            console.log("input", e.target.value);
+        })
+
+        const obj = {
+            key: {
+                test1: '1test1',
+                test2: '2test2'
+            },
+            key1: {
+                test3: '3test3',
+                test4: '4test4'
+            },
+            key2: {
+                test5: '5test5',
+                test6: '6test6'
+            }
+        }
+
+        for (let k in obj) {
+            console.log(k)
+            for (let _k in obj[k]) {
+                console.log(`${sub_k}: ${obj[k][sub_k]}`);
+            }
+            console.log('-----------')
+        }
+
+
+    </script>
+
+</body>
+
+</html>

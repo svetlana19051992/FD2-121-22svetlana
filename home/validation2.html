@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <form id="dynForm"  action="">
+           
+    </form>
+   
+      
+    
+    </div>
+   
+    <script>
+        let formDef1 = [
+         {label:'Разрабочики:', kind:'longtext', name:'developers'},         
+         {label:'Название сайта:', kind:'longtext', name:'sitename'},
+         {label:'URL сайта:', kind:'longtext', name:'siteurl'}, 
+         {label:'Дата запуска сайта:', kind:'datestart', name:'sitestart'},        
+         {label:'Посетителей в сутки:', kind:'number', name:'visitors'},
+         {label:'E-mail для связи:', kind:'shorttext', name:'email'},
+         {label:'Рубрика каталога:', kind:'combo', name:'division',
+          variants: [{text: 'здоровье', value:1}, {text: 'домашний уют', value:2}, {text: 'бытовая техника', value:3}]},
+         {label:'Размещение:', kind:'radio', name:'payment',
+          variants: [{text: 'бесплатное', value:1}, {text: 'платное', value:2}, {text: 'VIP', value:3}]},
+         {label:'Разрешить отзывы:', kind:'check', name:'votes'},
+         {label:'Описание сайта:', kind:'memo', name:'description'},
+         {caption:'Опубликовать', kind:'submit'}   
+        ];
+        function bilderForms(tegForm) {
+          const dynForm = document.getElementById('dynForm'); 
+         for (let obj of tegForm) {
+         if (obj.kind != 'submit') {
+            let div = document.createElement('div');
+            dynForm.appendChild(div);
+            let label = document.createElement('label');
+             
+            label.innerText = obj.label;
+            div.appendChild(label);
+            if (obj.kind==='longtext' || obj.kind==='number' || obj.kind==='shorttext' || obj.kind==='datestart') {
+                let input = document.createElement('input');
+                 input.setAttribute('class', 'field');
+                 if (obj.kind==='longtext') {                            
+                  input.setAttribute('type', 'text');
+                
+                 } else if (obj.kind==='datestart') {                
+                  input.setAttribute('type', 'date');
+                
+                 }else if (obj.kind==='number') {                
+                  input.setAttribute('type', 'number');
+                
+                 } else if (obj.kind==='shorttext') {                
+                  input.setAttribute('type', 'email');
+                
+                 } 
+                 input.setAttribute('name', obj.name);
+                 div.appendChild(input);
+                } else if (obj.kind==='combo') {
+                const select = document.createElement('select'); 
+                for (let i=2; i >= 0; i--) {                
+                const option = document.createElement('option');
+                option.setAttribute('value', obj.variants[i].value);
+                option.innerText = obj.variants[i].text;
+             
+                
+                select.appendChild(option);
+                
+                }
+                select.setAttribute('name', obj.name);
+                select.setAttribute('class', 'field');
+                div.appendChild(select);
+            }   else if (obj.kind==='radio') {
+                    
+                    
+                    for (let i=0; i < 3; i++) {                
+                    let input = document.createElement('input');
+                    input.setAttribute('type', 'radio');
+
+                    input.setAttribute('value', obj.variants[i].value);
+                    input.setAttribute('name', obj.name);
+                    input.setAttribute('class', 'field');
+                    let label = document.createElement('label');
+                    label.innerText = obj.variants[i].text; 
+                              
+                    div.appendChild(input);
+                    div.appendChild(label);                               
+                    }  
+                } else if (obj.kind==='check') {
+                    const input = document.createElement('input');
+                    input.setAttribute('type', 'checkbox');
+                  //  input.setAttribute('checked', 'checked');
+                    input.setAttribute('name', obj.name);
+                    input.setAttribute('class', 'field');
+                    div.appendChild(input); 
+                } else if (obj.kind==='memo') {
+                    const textarea = document.createElement('textarea');
+                    
+                    textarea.setAttribute('name', obj.name);
+                    textarea.setAttribute('class', 'field');
+                    const br = document.createElement('br');
+                    div.appendChild(br);
+                    div.appendChild(textarea);
+                }
+                    
+            }  else if (obj.kind==='submit') {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'submit');
+                input.setAttribute('value', obj.caption);
+                dynForm.appendChild(input);
+            
+              } 
+              
+            
+            
+            }         
+        }
+    
+         bilderForms(formDef1);
+         const dynForm = document.getElementById('dynForm'); 
+         const elems = dynForm.querySelectorAll('.field');
+         for (let i=0; i<elems.length; i++){
+         elems[i].addEventListener('blur', function(e) {
+      //    let errs = dynForm.querySelectorAll('.err');
+      //    for (let i=0; i<errs.length; i++) {
+      //      errs[i].remove();
+      //    }
+          if (!elems[i].value) {
+                console.log ('Заполните поле.');
+                let err = document.createElement('div');
+                err.style.display = 'inline-block';
+                err.className = 'err';
+                err.style.color = 'red';
+                err.innerHTML = 'Заполните поле.';
+                elems[i].after(err);
+              
+          } 
+
+        
+        })}
+      //      e.preventDefault();
+      //    let errs = dynForm.querySelectorAll('.err');
+      //    for (let i=0; i<errs.length; i++) {
+      //      errs[i].remove();
+      //    }
+      //    for(let i=0; i<elems.length; i++) {
+      //      if (!elems[i].value) {
+      //          console.log ('Заполните поле.');
+      //          let err = document.createElement('div');
+      //          err.className = 'err';
+      //          err.style.color = 'red';
+      //          err.innerHTML = 'Заполните поле.';
+      //          dynForm.insertBefore(err, elems[i]);
+      //      }
+      //   }
+      //   })
+         dynForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+          let errs = dynForm.querySelectorAll('.err');
+          for (let i=0; i<errs.length; i++) {
+            errs[i].remove();
+          }
+          for(let i=0; i<elems.length; i++) {
+            if (!elems[i].value) {
+                console.log ('Заполните поле.');
+                let err = document.createElement('div');
+                err.style.display = 'inline-block';
+                err.className = 'err';
+                err.style.color = 'red';
+                err.innerHTML = 'Заполните поле.';
+                elems[i].after(err);
+            }
+         }
+         })
+    </script>
+  </body>
+</html>
+elem.scrollIntoView(top)

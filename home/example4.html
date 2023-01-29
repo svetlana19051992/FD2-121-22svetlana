@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="utf-8" />
+        </head>
+        <body>
+            <script>
+let items = [
+    {
+        pic: "Rectangle 15.png",
+        title: "Вязаный шарф",
+        location: "Минск, ул. Домодедова 17",
+        items: " Зонтик, собаку",
+    },
+    {
+        pic: "jk.png",
+        title: "Термокружки 3шт.",
+        location: "Минск, ул. Октябрьская 19Б",
+        items: "Косметичку, дом",
+    },  
+];
+ 
+window.addEventListener("load", function() {
+    let fragment = document.createDocumentFragment(),
+            moduleCards = document.createElement("div");
+    moduleCards.className = "module-cards";
+    for(let i = 0; i < items.length; i++) {
+        let item = document.createElement("div");
+        item.className = "item";
+        item.dataset.index = i;
+        item.innerHTML = items[i].title + "<br/>" + items[i].location;
+        moduleCards.appendChild(item);
+    }
+    fragment.appendChild(moduleCards);
+    document.body.appendChild(fragment);
+});
+ 
+document.body.addEventListener("click", function(e) {
+    if (e.target.classList.contains(`item`))
+        console.log(items[e.target.dataset.index]);
+});
+</script>
+</body>
+</html>
+

@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    
+    <style>
+      
+    </style>
+  </head>
+  <body>
+    <form id="dynForm"  action="">
+           
+    </form>
+       
+      
+    
+    </div>
+   
+    <script>
+        let formDef1 = [
+         {label:'Фамилия:', kind:'longtext', name:'lastname'},
+         {label:'Имя:', kind:'longtext', name:'firstname'},
+         {label:'Отчество:', kind:'longtext', name:'secondname'}, 
+         {label:'Возраст:', kind:'number', name:'age'},
+         {caption:'Зарегистрироваться', kind:'submit'}
+        ];
+        let formDef2 = [
+         {label:'Название сайта:', kind:'longtext', name:'sitename'},
+         {label:'URL сайта:', kind:'longtext', name:'siteurl'},          
+         {label:'Посетителей в сутки:', kind:'number', name:'visitors'},
+         {label:'E-mail для связи:', kind:'shorttext', name:'email'},
+         {label:'Рубрика каталога:', kind:'combo', name:'division',
+          variants: [{text: 'здоровье', value:1}, {text: 'домашний уют', value:2}, {text: 'бытовая техника', value:3}]},
+         {label:'Размещение:', kind:'radio', name:'payment',
+          variants: [{text: 'бесплатное', value:1}, {text: 'платное', value:2}, {text: 'VIP', value:3}]},
+         {label:'Разрешить отзывы:', kind:'check', name:'votes'},
+         {label:'Описание сайта:', kind:'memo', name:'description'},
+         {caption:'Опубликовать', kind:'submit'}   
+        ];
+        function bilderForms(tegForm) {
+          const dynForm = document.getElementById('dynForm'); 
+         for (let obj of tegForm) {
+         if (obj.kind != 'submit') {
+            let label = document.createElement('label');
+             
+            label.innerText = obj.label;
+            dynForm.appendChild(label);
+            if (obj.kind==='longtext' || obj.kind==='number' || obj.kind==='shorttext') {
+                let input = document.createElement('input');
+                 if (obj.kind==='longtext') {                            
+                  input.setAttribute('type', 'text');
+                
+                 } else if (obj.kind==='number') {                
+                  input.setAttribute('type', 'number');
+                
+                 } else if (obj.kind==='shorttext') {                
+                  input.setAttribute('type', 'email');
+                
+                 }
+
+                 dynForm.appendChild(input);
+            } else if (obj.kind==='combo') {
+                const select = document.createElement('select'); 
+                for (let i=0; i < 3; i++) {                
+                const option = document.createElement('option');
+                option.setAttribute('value', obj.variants[i].value);
+                option.innerText = obj.variants[i].text;
+             
+
+                select.appendChild(option);
+                }
+                dynForm.appendChild(select);
+            }
+            }  else if (obj.kind==='submit') {
+                const input = document.createElement('input');
+                input.setAttribute('type', 'submit');
+                input.setAttribute('value', obj.caption);
+                dynForm.appendChild(input);
+            
+              } 
+            const br = document.createElement('br');
+            dynForm.appendChild(br);
+            
+         }         
+        }
+        
+         bilderForms(formDef1);
+         bilderForms(formDef2);
+    </script>
+  </body>
+</html>

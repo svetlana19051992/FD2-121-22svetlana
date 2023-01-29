@@ -82,26 +82,46 @@
 
       <a href="#${car.id}" class="btn btn-primary">Go sommehere</a>
       <button class="card-price" onclick="showPrice('${car.id}')">price</button>
-      
+    </div>  
     </div>` 
         }
     let app = document.getElementById('app');
     app.innerHTML = str;
     function showCars() {
-    document.getElementById('app').style.display="flex";
+    document.getElementById('app').style.display="block";
     }   
 
     function showPrice(num) {
       let carPrice = document.getElementsByClassName('card-price')[num-1];
       carPrice.textContent = cars[num-1].price;
     }
-     function sortMinMax() { 
+    var appFull = document.getElementById('app');
+    var items = appFull.childNodes;
+    var itemsArr = [];
+//    for (let i in items ) {
+//        if (items[i].nodeType == 1)
+//        itemsArr.push(items[i])
+//    }
+    for (var i in items) {
+  if (items[i].nodeType == 1) {
+    itemsArr.push(items[i]);
+  }
+}
+
+  //   function sortMinMax() { 
+  //    cars.sort((a, b) => a.price < b.price ? -1: 1) 
+  //    for (i = 0; i < cars.length; ++i) {
+   //   appFull.appendChild(cars[i]);
+  //    }
+  //    }
+      function sortMinMax() { 
       cars.sort((a, b) => a.price < b.price ? -1: 1) 
-      return carMinMax
-      }
-      
-        
-      
+      for (i = 0; i < cars.length; ++i) {
+      appFull.appendChild(cars[i]);
+     }
+    }  
+    
+  
                
         
     function sortMaxMin() { 

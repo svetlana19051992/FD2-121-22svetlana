@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <article class="appartments-item" tabindex="0" price="5000000">
+          <h2 class="appartments-item__title">Студия №44</h2>
+          <div class="appartments-item__price">5 000 000 руб</div>
+          <footer class="appartments-item__footer  appartments-footer">
+            <span class="appartments-footer__text--free">Свободно</span>
+            <span class="appartments-footer__text--reserved">Забронировано</span>
+          </footer>
+          <div class="appartments-item__star"></div>
+        </article>
+      
+        <article class="appartments-item" tabindex="0" price="16000000">
+          <h2 class="appartments-item__title">Однокомнатная №666</h2>
+          <div class="appartments-item__price">16 000 000 руб</div>
+          <footer class="appartments-item__footer  appartments-footer">
+            <span class="appartments-footer__text--free">Свободно</span>
+            <span class="appartments-footer__text--reserved">Забронировано</span>
+          </footer>
+          <div class="appartments-item__star"></div>
+        </article>
+      
+        <article class="appartments-item" tabindex="0" price="5000">
+          <h2 class="appartments-item__title">Студия №41</h2>
+          <div class="appartments-item__price">5 000 руб</div>
+          <footer class="appartments-item__footer  appartments-footer">
+            <span class="appartments-footer__text--free">Свободно</span>
+            <span class="appartments-footer__text--reserved">Забронировано</span>
+          </footer>
+          <div class="appartments-item__star"></div>
+        </article>
+      </div>
+      
+      <button id="sort">Sort</button>
+    <script>
+    function callback(evt) {
+
+var list = document.getElementById('wrapper');
+
+var items = list.childNodes;
+var itemsArr = [];
+for (var i in items) {
+  if (items[i].nodeType == 1) {
+    itemsArr.push(items[i]);
+  }
+}
+
+itemsArr.sort(function(a, b) {
+  return parseFloat(a.getAttribute('price')) == parseFloat(b.getAttribute('price')) ?
+    0 :
+    (parseFloat(a.getAttribute('price')) > parseFloat(b.getAttribute('price')) ? 1 : -1);
+});
+
+for (i = 0; i < itemsArr.length; ++i) {
+  list.appendChild(itemsArr[i]);
+}
+}
+
+document.getElementById('sort').addEventListener('click', callback);
+     
+     
+        </script>
+</body>
+</html>

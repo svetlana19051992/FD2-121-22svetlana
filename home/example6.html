@@ -1,0 +1,37 @@
+window.onload = function() {
+    let form = document.querySelector('.form');
+    form.addEventListener('submit', function(event) {
+      let controls = this.querySelectorAll('.form-control');
+      let isValid = true;
+      controls.forEach(control => {
+        control.classList.remove('invalid-control');
+        if (control.classList.contains('required') && !control.value) {
+          control.classList.add('invalid-control');
+          isValid = false;
+        }
+      });
+      
+      if (!isValid) {
+        event.preventDefault();
+      }
+    });
+  }
+  .invalid-control {
+    border-color: red !important;
+  }
+  
+  .form-control {
+    border: 1px solid;
+  }
+  <form class="form">
+    <div class="form-inner">
+      <p><input placeholder="Name" name="name" class="form-control required"></p>
+      <p><input placeholder="City" name="city" class="form-control required"></p>
+      <p><input placeholder="Email" name="email" class="form-control required"></p> 
+      <p><input placeholder="Subject" name="subject" class="form-control required"></p>
+      <p>
+        <textarea placeholder="Message" name="mesage" class="form-control required"></textarea>
+      </p>
+      <p><input type="submit" value="Send"></p>
+    </div>
+  </form>

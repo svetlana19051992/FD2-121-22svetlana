@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <title>Javascript test</title>
+        <script type="text/javascript" language="javascript">
+            window.onload = function()
+            {
+                var field = document.getElementById("field");
+                var link = document.getElementById("link");
+                var output = document.getElementById("output");
+
+                field.onfocus = function() { output.innerHTML += "<br/>field.onfocus()"; };
+                field.onblur = function() { output.innerHTML += "<br/>field.onblur()"; };
+                link.onmouseover = function() { field.blur(); };
+            };
+        </script>
+    </head>
+    <body>
+        <form name="MyForm">
+            <input type="text" name="field" id="field" />
+            <a href="javascript:void(0);" id="link">Blur field on hover</a>
+            <div id="output"></div>
+        </form>
+    </body>
+</html>
+<input type="text" data-re="^[a-z а-я]{2,10}$" data-msg="Имя введено неправильно" id="name" />
+    <input type="text" data-re="^[a-z а-я]{2,10}$" data-msg="Фамилия введена неправильно" id="surname" />
+    <input type="text" data-re="^[\w-\.]+@[\w-]+\.[a-z]{2,15}$" data-msg="Email введен неправильно" id="email" />
+    <input type="text" data-re="^[0-9]{5,13}$" data-msg="Номер телефона введен неправильно" id="number" />
+JavascriptВыделить код
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+        for (const input of ["name", "surname", "email", "number"].map(id => document.getElementById(id)))
+        {
+            input.addEventListener("blur", function (evt) {
+                let re = new RegExp(evt.target.dataset.re, "i");
+                if(re.test(evt.target.value) == false)
+                {
+                    alert(evt.target.dataset.msg);
+                }
+            })
+        }
