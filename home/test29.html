@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            
+        }
+        #app {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+            background-image: url(img/birds2.jpg);
+            background-size: 100vw 100vh;
+            
+        }
+        .btn1, .btn2 {
+            position: absolute;
+            top: 80%;
+            background-color: violet;
+            width: 140px;
+            height: 50px;
+            border-radius: 20px;
+            border: none;
+            color: brown;
+            font-weight: bold;
+        }
+        .btn1 {
+            left: calc(50% - 150px);
+        }
+        .btn2 {
+            left: calc(50% + 10px);
+        }
+        .name_game {
+            position: absolute;
+            top: 50px;
+            font-size: 60px;
+            color: violet;
+            width: 300px;
+            left: calc(50% - 150px);
+            
+        }
+
+    </style>
+</head>
+<body>
+    <input class='btn1' type=button value='ОБНОВИТЬ' onclick='switchToMainPage()'>
+    <input class='btn2' type=button value='ИГРАТЬ' onclick='switchToAboutPage()'>
+    <div class='name_game'>Fluppy bird</div> 
+    <div id="app">
+                
+    </div>
+    <script>
+        "use strict";
+       
+    window.onhashchange = switchToStateFromURLHash;
+    
+    var SPAState = {};
+
+
+    function switchToStateFromURLHash() {
+        var URLHash = window.location.hash;
+
+        var stateStr = URLHash.substr(1);
+        
+
+        var pageHTML = "";
+        switch (stateStr) {  
+            case 'Main':
+            
+                pageHTML += renderMain();
+                break;
+            case 'Games':
+                pageHTML += "<h3>О нас</h3>";
+                pageHTML += "<p>Мы круты!</p>";
+               
+                document.querySelector('.name_game').textContent='';
+                let pp = renderGames();
+                document.getElementById('app').appendChild(pp);
+                break;
+            case 'test':
+                pageHTML += "<h3>TEST</h3>";
+                pageHTML += "<p>Мы круты!</p>";
+                break;
+        }
+        document.getElementById('app').innerHTML = pageHTML;
+    }
+
+    function switchToState(newState) {
+        var stateStr = newState.pagename;
+        location.hash = stateStr;
+    }
+
+    function switchToMainPage() {
+        switchToState({ pagename: 'Main' });
+    }
+
+    function switchToAboutPage() {
+        switchToState({ pagename: 'Games' });
+    }
+
+    switchToStateFromURLHash();
+
+    function renderMain(){
+            return (
+                `<style>
+                    body {background-image: url(img/birds.jpg)}
+                    
+                </style>
+                `
+            )
+    
+        }
+
+
+function renderGames(){    
+var app = document.getElementById('app');
+var canv = document.createElement('canvas'); 
+canv.setAttribute('id', 'canvas');
+canv.setAttribute('width', '1100');
+canv.setAttribute('height', '512');
+app.appendChild(canv);    
+var cvs = document.getElementById("canvas");
+var ctx = cvs.getContext("2d");
+
+var bird = new Image();
+var bg = new Image();
+var fg = new Image();
+var pipeUp = new Image();
+var pipeBottom = new Image();
+
+bird.src = "img/bird.png";
+bg.src = "img/aldea.jpg";
+fg.src = "img/fg.png";
+pipeUp.src = "img/pipeUp.png";
+pipeBottom.src = "img/pipeBottom.png";
+
+// Звуковые файлы
+var fly = new Audio();
+var score_audio = new Audio();
+
+fly.src = "audio/fly.mp3";
+score_audio.src = "audio/score.mp3";
+
+var gap = 90;
+
+// При нажатии на какую-либо кнопку
+document.addEventListener("click", moveUp);
+
+function moveUp() {
+ yPos -= 25;
+ fly.play();
+}
+
+// Создание блоков
+var pipe = [];
+
+pipe[0] = {
+ x : cvs.width,
+ y : 0
+}
+
+var score = 0;
+// Позиция птички
+var xPos = 120;
+var yPos = 150;
+var grav = 1.5;
+pipeBottom.onload = draw;
+
+
+
+function draw() {
+ ctx.drawImage(bg, 0, 0, 1100, 512);
+
+ for(var i = 0; i < pipe.length; i++) {
+ ctx.drawImage(pipeUp, pipe[i].x, pipe[i].y, 80, 242);
+ ctx.drawImage(pipeBottom, pipe[i].x, pipe[i].y + pipeUp.height + gap, 80, 378);
+
+ pipe[i].x--;
+
+ if(pipe[i].x == 500) {
+ pipe.push({
+ x : cvs.width,
+ y : Math.floor(Math.random() * pipeUp.height) - pipeUp.height
+ });
+ }
+
+ // Отслеживание прикосновений
+ if(xPos + bird.width >= pipe[i].x
+ && xPos <= pipe[i].x + pipeUp.width
+ && (yPos <= pipe[i].y + pipeUp.height
+ || yPos + bird.height >= pipe[i].y + pipeUp.height + gap) || yPos + bird.height >= cvs.height - fg.height) {
+         // Перезагрузка страницы
+ modalWindow(score);
+ 
+ }
+
+ if(pipe[i].x == 5) {
+ score++;
+ score_audio.play();
+ }
+ }
+
+ ctx.drawImage(fg, 0, cvs.height - fg.height, 1100, 118);
+ ctx.drawImage(bird, xPos, yPos);
+
+ yPos += grav;
+
+ ctx.fillStyle = "#000";
+ ctx.font = "24px Verdana";
+ ctx.fillText("Счет: " + score, 10, cvs.height - 20);
+
+ requestAnimationFrame(draw);
+}
+
+pipeBottom.onload = draw;
+}
+//renderGames();
+
+function modalWindow(data) {
+    let div = document.createElement('div');
+    div.style.width = '400px';
+    div.style.height = '270px';
+    div.style.display = 'block';
+    div.stile.position = 'absolute';
+    div.style.marginTop = '60px';
+    div.style.borderRadius = '80px';
+    div.style.backgroundColor = 'brown';
+    div.textContent = `Количество набранных очков: ${data}`;
+    div.style.color = 'white';
+    div.style.fontSize = '50px';
+    div.style.textAlign = 'center';
+    div.style.paddingTop = '70px';
+    let app = document.getElementById('app');
+
+    app.appendChild(div);
+  //  cancelAnimationFrame();
+}
+        </script>
+</body>
+</html>
+
+location.reload()

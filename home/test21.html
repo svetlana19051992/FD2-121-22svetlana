@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type=button value='Обновить' onclick='switchToMainPage()'>
+    <input type=button value='Начать' onclick='switchToAboutPage()'>
+    <div id='app'>
+        
+    </div>
+    <script>
+        "use strict";
+    
+        window.onhashchange = switchToStateFromURLHash;
+    
+        var SPAState = {};
+    
+    
+        function switchToStateFromURLHash() {
+            var URLHash = window.location.hash;
+    
+            var stateStr = URLHash.substr(1);
+    
+    
+            var pageHTML = "";
+            switch (stateStr) {
+                case 'Main':
+                    pageHTML += renderMain();
+                    break;
+                case 'Games':
+                    pageHTML += "<h3>О нас</h3>";
+                    pageHTML += "<p>Мы круты!</p>";
+                    pageHTML += '<div id="canvas" width="1200" height="800"></div>';
+                    pageHTML += renderGames();
+                    break;
+                case 'test':
+                    pageHTML += "<h3>TEST</h3>";
+                    pageHTML += "<p>Мы круты!</p>";
+                    break;
+            }
+            document.getElementById('app').innerHTML = pageHTML;
+        }
+    
+    
+        function switchToState(newState) {
+            var stateStr = newState.pagename;
+            location.hash = stateStr;
+        }
+    
+        function switchToMainPage() {
+            switchToState({ pagename: 'Main' });
+        }
+    
+        function switchToAboutPage() {
+            switchToState({ pagename: 'Games' });
+        }
+    
+        switchToStateFromURLHash();
+    
+    
+        function renderMain(){
+            return (
+                `<style>
+                    body {background-image: url(img/bg.png)}
+              //      .canvas {display:none}
+                </style>`
+            )
+    
+        }
+        function renderGames(){
+            return (
+                `<style>
+                    body {background-image: url(img/zamok1.png)}    
+                //    #canvas {display:block}
+                </style>`
+            )
+    
+        }
+        var cvs = document.getElementById("canvas");
+     /*   var ctx = cvs.getContext("2d");
+        var bg = new Image();
+        bg.src = "img/zamok1.png";*/
+    </script>
+</body>
+</html>
+<canvas class="canvas" width="1200" height="800"></canvas>

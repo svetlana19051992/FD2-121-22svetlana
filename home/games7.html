@@ -1,0 +1,216 @@
+<!DOCTYPE Html>
+<html lang="en">
+    <Head>
+        <Meta Charset="UTF-8" />
+        <Meta Http-Equiv="X-UA-Compatible" Content="IE=Edge" />
+        <Meta Name="Viewport" Content="Width=Device-Width, Initial-Scale=1.0" />
+        <Title>Flappy Bird Game</Title>
+    </Head>
+    <Body>
+        <H3>FlappyBird Game</H3>
+        <Div Class="Random">
+            <Canvas Id="Canvas" Width="288" Height="512"></Canvas>
+        </Div>
+        <Script Src="FlappyBird.Js"></Script>
+        <script>
+            "Use Strict";
+
+Var Cvs = Document.GetElementById("Canvas");
+Var Ctx = Cvs.GetContext("2d");
+
+// Load Images
+Var Bird = New Image();
+Var Bg = New Image();
+Var Fg = New Image();
+Var PipeNorth = New Image();
+Var PipeSouth = New Image();
+
+Bird.Src = "Images/Bird.Png";
+Bg.Src = "Images/Bg.Png";
+Fg.Src = "Images/Fg.Png";
+PipeNorth.Src = "Images/PipeNorth.Png";
+PipeSouth.Src = "Images/PipeSouth.Png";
+
+// Some Variables
+Var Gap = 85;
+Var Constant;
+Var BX = 10;
+Var BY = 150;
+Var Gravity = 1.5;
+Var Score = 0;
+
+// Audio Files
+Var Fly = New Audio();
+Var Scor = New Audio();
+
+Fly.Src = "Sounds/Fly.Mp3";
+Scor.Src = "Sounds/Score.Mp3";
+
+// On Key Down
+Document.AddEventListener("Keydown", MoveUp);
+
+Function MoveUp() {
+  BY -= 25;
+
+  Fly.Play();
+}
+
+// Pipe Coordinates
+Var Pipe = [];
+
+Pipe[0] = {
+  X: Cvs.Width,
+
+  Y: 0,
+};
+
+// Draw Images
+Function Draw() {
+  Ctx.DrawImage(Bg, 0, 0);
+
+  For (Var I = 0; I < Pipe.Length; I++) {
+    Constant = PipeNorth.Height + Gap;
+
+    Ctx.DrawImage(PipeNorth, Pipe[I].X, Pipe[I].Y);
+    Ctx.DrawImage(PipeSouth, Pipe[I].X, Pipe[I].Y + Constant);
+
+    Pipe[I].X--;
+
+    If (Pipe[I].X == 125) {
+      Pipe.Push({
+        X: Cvs.Width,
+        Y: Math.Floor(Math.Random() * PipeNorth.Height) - PipeNorth.Height,
+      });
+    }
+
+    // Detect Collision
+    If (
+      (BX + Bird.Width >= Pipe[I].X &&
+        BX <= Pipe[I].X + PipeNorth.Width &&
+        (BY <= Pipe[I].Y + PipeNorth.Height ||
+          BY + Bird.Height >= Pipe[I].Y + Constant)) ||
+      BY + Bird.Height >= Cvs.Height - Fg.Height
+    ) {
+      Location.Reload(); // Reload The Page
+    }
+
+    If (Pipe[I].X == 5) {
+      Score++;
+      Scor.Play();
+    }
+  }
+
+  Ctx.DrawImage(Fg, 0, Cvs.Height - Fg.Height);
+  Ctx.DrawImage(Bird, BX, BY);
+
+  BY += Gravity;
+  Ctx.FillStyle = "#000";
+  Ctx.Font = "20px Verdana";
+  Ctx.FillText("Score : " + Score, 10, Cvs.Height - 20);
+  RequestAnimationFrame(Draw);
+}
+
+Draw();
+
+        </script>
+    </Body>
+</Html>
+"Use Strict";
+
+Var Cvs = Document.GetElementById("Canvas");
+Var Ctx = Cvs.GetContext("2d");
+
+// Load Images
+Var Bird = New Image();
+Var Bg = New Image();
+Var Fg = New Image();
+Var PipeNorth = New Image();
+Var PipeSouth = New Image();
+
+Bird.Src = "Images/Bird.Png";
+Bg.Src = "Images/Bg.Png";
+Fg.Src = "Images/Fg.Png";
+PipeNorth.Src = "Images/PipeNorth.Png";
+PipeSouth.Src = "Images/PipeSouth.Png";
+
+// Some Variables
+Var Gap = 85;
+Var Constant;
+Var BX = 10;
+Var BY = 150;
+Var Gravity = 1.5;
+Var Score = 0;
+
+// Audio Files
+Var Fly = New Audio();
+Var Scor = New Audio();
+
+Fly.Src = "Sounds/Fly.Mp3";
+Scor.Src = "Sounds/Score.Mp3";
+
+// On Key Down
+Document.AddEventListener("Keydown", MoveUp);
+
+Function MoveUp() {
+  BY -= 25;
+
+  Fly.Play();
+}
+
+// Pipe Coordinates
+Var Pipe = [];
+
+Pipe[0] = {
+  X: Cvs.Width,
+
+  Y: 0,
+};
+
+// Draw Images
+Function Draw() {
+  Ctx.DrawImage(Bg, 0, 0);
+
+  For (Var I = 0; I < Pipe.Length; I++) {
+    Constant = PipeNorth.Height + Gap;
+
+    Ctx.DrawImage(PipeNorth, Pipe[I].X, Pipe[I].Y);
+    Ctx.DrawImage(PipeSouth, Pipe[I].X, Pipe[I].Y + Constant);
+
+    Pipe[I].X--;
+
+    If (Pipe[I].X == 125) {
+      Pipe.Push({
+        X: Cvs.Width,
+        Y: Math.Floor(Math.Random() * PipeNorth.Height) - PipeNorth.Height,
+      });
+    }
+
+    // Detect Collision
+    If (
+      (BX + Bird.Width >= Pipe[I].X &&
+        BX <= Pipe[I].X + PipeNorth.Width &&
+        (BY <= Pipe[I].Y + PipeNorth.Height ||
+          BY + Bird.Height >= Pipe[I].Y + Constant)) ||
+      BY + Bird.Height >= Cvs.Height - Fg.Height
+    ) {
+      Location.Reload(); // Reload The Page
+    }
+
+    If (Pipe[I].X == 5) {
+      Score++;
+      Scor.Play();
+    }
+  }
+
+  Ctx.DrawImage(Fg, 0, Cvs.Height - Fg.Height);
+  Ctx.DrawImage(Bird, BX, BY);
+
+  BY += Gravity;
+  Ctx.FillStyle = "#000";
+  Ctx.Font = "20px Verdana";
+  Ctx.FillText("Score : " + Score, 10, Cvs.Height - 20);
+  RequestAnimationFrame(Draw);
+}
+
+Draw();
+

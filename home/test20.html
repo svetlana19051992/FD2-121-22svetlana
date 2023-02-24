@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .square {
+        width: 400px;
+        height: 400px;
+        background-color: #000;
+        position: relative;
+      }
+      
+      .main-circle {
+        width: 300px;
+        height: 300px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        border: 2px solid #fff;
+        border-radius: 50%;
+      }
+      
+      .small-circle-box {
+        width: 70px;
+        height: 70px;
+        border: 2px solid #fff;
+        position: absolute;
+      }
+      
+      .angle {
+        position: absolute;
+        border: solid #fff;
+        width: 10px;
+        height: 10px;
+      }
+      
+      .angle-0 {
+        top: -4px;
+        left: -4px;
+        border-width: 4px 0 0 4px;
+      }
+      
+      .angle-1 {
+        top: -4px;
+        right: -4px;
+        border-width: 4px 4px 0 0;
+      }
+      
+      .angle-2 {
+        bottom: -4px;
+        right: -4px;
+        border-width: 0 4px 4px 0;
+      }
+      
+      .angle-3 {
+        bottom: -4px;
+        left: -4px;
+        border-width: 0 0 4px 4px;
+      }
+      
+      .no-border {
+        border: none;
+      }
+      
+      .small-circle {
+        width: 50px;
+        height: 50px;
+        background-color: #fff;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        border-radius: 50%;
+      }
+      
+      .box-0 {
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      
+      .box-1 {
+        top: 3%;
+        right: 3%;
+      }
+      
+      .box-2 {
+        top: 50%;
+        right: 0;
+        transform: translateX(50%) translateY(-50%);
+      }
+      
+      .box-3 {
+        bottom: 3%;
+        right: 3%;
+      }
+      
+      .box-4 {
+        left: 50%;
+        bottom: 0;
+        transform: translateX(-50%) translateY(50%);
+      }
+      
+      .box-5 {
+        bottom: 3%;
+        left: 3%;
+      }
+      
+      .box-6 {
+        top: 50%;
+        left: 0;
+        transform: translateX(-50%) translateY(-50%);
+      }
+      
+      .box-7 {
+        top: 3%;
+        left: 3%;
+      }
+      
+      .name {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        transform: translateY(-50%);
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+      }.square {
+  width: 400px;
+  height: 400px;
+  background-color: #000;
+  position: relative;
+}
+
+.main-circle {
+  width: 300px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+.small-circle-box {
+  width: 70px;
+  height: 70px;
+  border: 2px solid #fff;
+  position: absolute;
+}
+
+.angle {
+  position: absolute;
+  border: solid #fff;
+  width: 10px;
+  height: 10px;
+}
+
+.angle-0 {
+  top: -4px;
+  left: -4px;
+  border-width: 4px 0 0 4px;
+}
+
+.angle-1 {
+  top: -4px;
+  right: -4px;
+  border-width: 4px 4px 0 0;
+}
+
+.angle-2 {
+  bottom: -4px;
+  right: -4px;
+  border-width: 0 4px 4px 0;
+}
+
+.angle-3 {
+  bottom: -4px;
+  left: -4px;
+  border-width: 0 0 4px 4px;
+}
+
+.no-border {
+  border: none;
+}
+
+.small-circle {
+  width: 50px;
+  height: 50px;
+  background-color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50%;
+}
+
+.box-0 {
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.box-1 {
+  top: 3%;
+  right: 3%;
+}
+
+.box-2 {
+  top: 50%;
+  right: 0;
+  transform: translateX(50%) translateY(-50%);
+}
+
+.box-3 {
+  bottom: 3%;
+  right: 3%;
+}
+
+.box-4 {
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%) translateY(50%);
+}
+
+.box-5 {
+  bottom: 3%;
+  left: 3%;
+}
+
+.box-6 {
+  top: 50%;
+  left: 0;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.box-7 {
+  top: 3%;
+  left: 3%;
+}
+
+.name {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+    
+    <div class="square">
+  <div class="main-circle">
+    <div class="name">OPTION NAME</div>
+    <div class="small-circle-box box-0">
+      <div class="small-circle"></div>
+      <div class="angle angle-0"></div>
+      <div class="angle angle-1"></div>
+      <div class="angle angle-2"></div>
+      <div class="angle angle-3"></div>
+    </div>
+    <div class="small-circle-box box-1 no-border">
+      <div class="small-circle"></div>
+    </div>
+    <div class="small-circle-box box-2 no-border">
+      <div class="small-circle"></div>
+    </div>
+    <div class="small-circle-box box-3 no-border">
+      <div class="small-circle"></div>
+    </div>
+    <div class="small-circle-box box-4 no-border">
+      <div class="small-circle"></div>
+    </div>
+    <div class="small-circle-box box-5 no-border">
+      <div class="small-circle"></div>
+    </div>
+    <div class="small-circle-box box-6 no-border">
+      <div class="small-circle"></div>
+    </div>
+    <div class="small-circle-box box-7 no-border">
+      <div class="small-circle"></div>
+    </div>
+  </div>
+</div>
+        
+</body>
+</html>

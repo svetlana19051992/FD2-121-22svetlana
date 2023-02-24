@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    
+    <style>
+      
+      .basket {
+        display: block;
+        width: 20rem;
+        border: 1px black solid;
+        margin-left: 5rem;
+      }
+      
+    </style>
+  </head>
+  <body>  
+        <button class="btn1">Заполнить</button>  
+        <div class="basket">
+            <span>Корзина</span>
+            <div class="list"></div>
+            <div class="allPrice"></div>
+        </div>     
+     
+    <script>     
+
+        let basket = document.querySelector('.basket');
+        let list = document.querySelector('.list');
+        window.addEventListener('click', () => {
+            let arrBasketJson = localStorage.getItem("arrBasket");
+            let arrBasket = JSON.parse(arrBasketJson);
+       //     console.log(arrBasketJson);
+       //     console.log(arrBasket);
+       //     for (let i=0; i<arrBasket.length; i++) {
+       //         console.log(arrBasket[i]);
+       //     }
+            let num = 0;
+          let price = 0;
+          let basketDel = document.querySelectorAll('.divBasket');
+          for (let i=0; i<basketDel.length; i++) {
+            basketDel[i].remove();
+          }
+          for (let i=0; i<arrBasket.length; i++) {
+            price = arrBasket[i].price*arrBasket[i].quantity;
+          
+
+          let divBasket = document.createElement('div');
+          divBasket.className = 'divBasket';
+          list.appendChild(divBasket);
+          let modelBasket = document.createElement('span');
+          divBasket.appendChild(modelBasket);
+          modelBasket.textContent = arrBasket[i].model;
+          let priceBasket = document.createElement('span');
+          divBasket.appendChild(priceBasket);
+          priceBasket.textContent = ' ' + price + '$';
+          }
+        });        
+            
+        
+    </script>
+  </body>
+</html>

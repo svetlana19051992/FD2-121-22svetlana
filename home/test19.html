@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Analog Clock</title>
+  <style>
+  body {
+    margin: 0px;
+  }
+   
+  .clock_face {
+    margin: auto;
+    width: 300px;
+    height: 300px;
+    border-radius: 150px;
+    background-color: antiquewhite;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+   
+  .digit {
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: lightgreen;
+    position: absolute;
+    transform: translate(-50%, -50%);
+  }
+</style>
+</head>
+<body>
+
+  <script src="./script.js"></script>
+  <script>
+  "use script";
+ 
+  "use script";
+ 
+ let accuracy = 10000;
+  
+ let Watch = {
+   watchProperties: {
+     clockFace: null,
+     digit: null,
+     countDigits: 12,    
+     circleDiameterWithNumbers: 280,
+     circleRadiusWithNumbers: 280 / 2,
+   },
+  
+   init(accuracy) {
+     this.watchProperties.clockFace = document.createElement("div");
+     this.watchProperties.clockFace.classList.add("clock_face");
+     for (let i = 0; i < this.watchProperties.countDigits; i++) {
+       this.watchProperties.digit = document.createElement("div");
+       this.watchProperties.digit.classList.add("digit");
+       let angleEachDigitRadians =
+         (2 / this.watchProperties.countDigits) * i * Math.PI;
+       let left =
+         this.watchProperties.circleDiameterWithNumbers +
+         this.watchProperties.circleRadiusWithNumbers *
+           Math.sin(angleEachDigitRadians) -
+         this.watchProperties.circleRadiusWithNumbers  +
+         "px";
+       let top =
+         this.watchProperties.circleDiameterWithNumbers +
+         this.watchProperties.circleRadiusWithNumbers *
+           Math.cos(angleEachDigitRadians) -
+         (this.watchProperties.circleRadiusWithNumbers) +
+         "px";
+       this.watchProperties.digit.style.left = left;
+       this.watchProperties.digit.style.top = top;
+       this.watchProperties.clockFace.append(this.watchProperties.digit);
+     }
+     document.body.append(this.watchProperties.clockFace);
+   },
+ };
+  
+ document.addEventListener("DOMContentLoaded", function () {
+   Watch.init(accuracy);
+ });
+</script>
+</body>
+</html>

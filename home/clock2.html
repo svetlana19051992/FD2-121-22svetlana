@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Javascript Clock UI Dark</title>
+    
+    <style>
+        *
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;   
+}
+body
+{
+display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: white;
+}
+.task {
+    display:flex;
+}
+#app {
+  display: none;
+}
+.clock
+{
+  /*  width:600px;*/
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(218, 166, 24);
+    background-size: cover;
+    border: 1px solid rgb(218, 166, 24)low;
+    border-radius: 50%;
+  /*  box-shadow: 0 -15px 15px rgba(255,255,255,0.05),
+                inset 0 -15px 15px rgba(255,255,255,0.05),
+                0 15px 15px rgba(0,0,0,0.3),
+                inset 0 15px 15px rgba(0,0,0,0.3);*/
+}
+.clock:before
+{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: rgb(85, 3, 3);
+    border-radius: 50%;
+    z-index: 10000;
+}
+.clock .hour,
+.clock .min,
+.clock .sec
+{
+    position: absolute;
+}
+
+/*.clock .hour, .hr
+{
+ width: 160px;
+ height: 160px;
+}*/
+/*.clock .min, .mn
+{
+ width: 190px;
+ height: 190px;
+}*/
+/*.clock .sec, .sc
+{
+ width: 230px;
+ height: 230px;
+}*/
+.hr, .mn, .sc
+{
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    position: absolute;
+    border-radius: 50%;
+}
+.hr:before
+{
+  content: '';
+    position: absolute;
+    width: 8px;
+    height: 80px;
+    background: rgb(85, 3, 3);
+    z-index: 10;
+    border-radius: 6px 6px 0 0;
+}
+.mn:before
+{
+  content: '';
+    position: absolute;
+    width: 4px;
+    height: 90px;
+    background: rgb(85, 3, 3);
+    z-index: 11;
+    border-radius: 6px 6px 0 0;
+}
+.sc:before
+{
+  content: '';
+    position: absolute;
+    width: 2px;
+    height: 150px;
+    background: rgb(85, 3, 3);
+    z-index: 12;
+    border-radius: 6px 6px 0 0;
+}
+/*
+span
+{
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  width: 9%;
+  height: 4px;
+  z-index: 25px;
+  background: transparent;  
+  transform-origin: left;
+  animation: animate 3s linear infinite;
+} */
+/*span:after
+{
+  content:'';
+  position: absolute;
+  width: 8px;
+  height: 25px;
+  border-radius: 50%;
+  background: purple;
+  top: -6px;
+  right: -8px;
+  box-shadow: 0 0 20px blue;
+}*/
+.circle {
+    position: absolute;
+    
+    border-radius: 50%;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 8;
+}
+
+ .wrapper {
+    position: relative;
+ /* transform: translate(-15%, -15%);*/
+  /*  top: 50%;
+    left: 50%; */
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+  /*  border: 10px solid red;*/
+}
+.digital_clock {
+  color:rgb(85, 3, 3);
+  font-weight: bold;
+  font-size: 30px;
+  position: relative;
+ /* top: -4rem;*/
+}
+
+    </style>
+</head>
+<body>
+  <div class="task">
+    <label>Введите число
+        <input type="number" name="name" min="200" max="800">
+    </label>
+    <button onclick="showClock()">Построить часы</button>
+     <span></span>
+       </div>
+</div>
+<div id="app">
+   <div class="clock">
+    <div class="wrapper">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+      </div>
+    <div class="digital_clock"></div>
+     <div class="hour">
+      <div class="hr" id="hr"></div>
+    </div>
+    <div class="min">
+      <div class="mn" id="mn">
+        </div>
+    
+     </div>
+    <div class="sec">
+      <div class="sc" id="sc">
+        </div>
+  </div>
+      
+       <script type="text/javascript">
+        
+        function showClock() {
+          document.getElementById('app').style.display="flex"; 
+          document.querySelector('.task').style.display="none";
+
+          const clockSize = document.querySelector("[name='name']").value; 
+          document.querySelector('.clock').style.height=clockSize + 'px'; 
+          document.querySelector('.clock').style.width=clockSize + 'px';
+          document.querySelector('.digital_clock').style.top= - clockSize /4 + 'px';
+          document.querySelector('.wrapper').style.top= - clockSize /16 + 'px';
+          document.querySelector('.wrapper').style.left=  clockSize /16  + 'px';
+          let circle = document.getElementsByClassName('circle'); 
+          for (let i=0; i<circle.length; i++) {
+            circle[i].style.width = clockSize /8 + 'px';
+            circle[i].style.height = clockSize /8 + 'px';
+            circle[i].style.top = - clockSize /8 + 'px';
+          }
+          
+          
+           let delta = Math.PI * 2 / circle.length;
+           let angle = 0;
+           for (let i = 0; i < circle.length; i++) {
+            circle [i].style.top = -(clockSize / 2 - clockSize / 10)*Math.cos(angle) + 'px';
+            circle [i].style.left = (clockSize / 2 - clockSize / 10)*Math.sin(angle) + 'px';                    
+            circle[i].textContent = i;  
+            circle[0].textContent = circle.length;          
+            angle += delta;
+        }
+        function digitClock() {
+          
+            var now = new Date();
+            var digitalClock = document.querySelector('.digital_clock');
+            digitalClock.innerHTML = now.toLocaleTimeString();
+          }
+          
+        setInterval(digitClock, 1000);
+        digitClock();
+       const deg=6;
+           const hr = document.querySelector('#hr');
+           const mn = document.querySelector('#mn');
+           const sc = document.querySelector('#sc');
+           setInterval(() => {
+               
+           let day = new Date();
+           let hh = day.getHours() * 30;
+           let mm = day.getMinutes() * deg;
+           let ss = day.getSeconds() * deg;
+           
+           hr.style.transform = `rotateZ(${(hh)+(mm/12)}deg)`;
+           mn.style.transform = `rotateZ(${mm}deg)`;
+           sc.style.transform = `rotateZ(${ss}deg)`;
+           })
+           
+
+           }
+       </script>
+</body>
+</html>
